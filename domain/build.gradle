@@ -1,13 +1,12 @@
 plugins {
     id 'com.android.library'
-    id 'kotlin-android'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
 
 android {
-    namespace 'com.begobang.data'
+    namespace 'com.begobang.domain'
     compileSdk 33
 
     defaultConfig {
@@ -16,8 +15,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-
-        buildConfigField("String", "API_BASE_URL", "\"https://pokeapi.co/api/v2\"")
     }
 
     buildTypes {
@@ -37,18 +34,9 @@ android {
 
 dependencies {
 
-    implementation project(":domain")
-
     //Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-
-    //Retrofit
-    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
-
-    //noinspection GradleDependency
-    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
 
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$androidx_test_ext_junit_version"
