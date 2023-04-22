@@ -1,12 +1,13 @@
-package com.begobang.data
+package com.begobang.data.remoteDataSource
 
+import com.begobang.data.apiService.GetPokemonsApiService
 import com.begobang.data.response.PokemonsResponse
 import retrofit2.await
 import javax.inject.Inject
 
 
-class GetPokemonRemoteDataSource @Inject constructor(
-    private val pokemonsApiService: GetPokemonApiService
+class GetPokemonsRemoteDataSource @Inject constructor(
+    private val pokemonsApiService: GetPokemonsApiService
 ) {
 
     suspend fun getPokemons(): PokemonsResponse {
