@@ -41,7 +41,7 @@ class DataModule {
 
     @Provides
     @ApiEndPoint
-    fun provideApiEndPoint(): String = "https://pokeapi.co/api/v2"
+    fun provideApiEndPoint(): String = "https://pokeapi.co/api/v2/"
 
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
