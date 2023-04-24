@@ -11,13 +11,11 @@ android {
     compileSdk 33
 
     defaultConfig {
-        minSdk 24
+        minSdk 26
         targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-
-        buildConfigField("String", "API_BASE_URL", "\"https://pokeapi.co/api/v2\"")
     }
 
     buildTypes {
@@ -36,7 +34,6 @@ android {
 }
 
 dependencies {
-
     implementation project(":domain")
 
     //Hilt
@@ -47,10 +44,12 @@ dependencies {
     api "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
-    //noinspection GradleDependency
+    //OkHttp3
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
 
+
+    //Testing
     testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$androidx_test_ext_junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$test_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 }

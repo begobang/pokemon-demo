@@ -1,8 +1,8 @@
 pluginManagement {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-        gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
@@ -10,10 +10,23 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        flatDir {
+            dirs 'data/libs'
+        }
+        maven {
+            Properties properties = new Properties()
+            properties.load(file('local.properties').newDataInputStream())
+
+            url "https://maven.pkg.github.com/Rocket-Beer/*"
+            credentials {
+                username = properties.getProperty("github.username")
+                password = properties.getProperty("github.token")
+            }
+        }
     }
 }
 rootProject.name = "Pokemon"
 include ':app'
-include ':data'
-include ':domain'
 include ':presentation'
+include ':domain'
+include ':data'
