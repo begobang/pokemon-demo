@@ -47,6 +47,8 @@ dependencies {
     //OkHttp3
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
 
+    implementation "io.arrow-kt:arrow-core:$arrow_core_version"
+
 
     //Testing
     testImplementation "junit:junit:$junit_version"
