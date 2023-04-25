@@ -39,18 +39,6 @@ fun Toolbar(
                             contentDescription = "back"
                         )
                     }
-                },
-                actions = {
-                    if(!showUpNavigation){
-                        AppBarIcon(
-                            imageVector = Icons.Filled.Search,
-                            onClick = {
-
-                            },
-                            contentDescription = "search"
-                        )
-                    }
-
                 }
             )
         }
