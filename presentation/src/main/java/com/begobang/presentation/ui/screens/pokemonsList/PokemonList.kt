@@ -39,6 +39,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.begobang.domain.business.PokemonItemBusiness
 import com.begobang.presentation.R
+import com.begobang.presentation.ui.composables.BaseScreen
 import com.begobang.presentation.ui.composables.EmptyState
 import com.begobang.presentation.ui.composables.SearchBar
 import com.begobang.presentation.ui.composables.Separator
@@ -66,28 +67,7 @@ fun PokemonListScreen(loading: Boolean, pokemonList: List<PokemonItemBusiness>? 
 
     var search by rememberSaveable { mutableStateOf("") }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        if (loading) {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .padding(top = 40.dp)
-                    .size(size = 48.dp)
-
-            )
-
-        }
-
-        error?.let {
-            EmptyState(it){
-                onRetry()
-            }
-        }
-
+    BaseScreen(loading = loading, error = error, onRetry = { onRetry() }) {
         pokemonList?.let {
             if(pokemonList.isNotEmpty()){
                 SearchBar(
@@ -109,7 +89,6 @@ fun PokemonListScreen(loading: Boolean, pokemonList: List<PokemonItemBusiness>? 
 
             }
         }
-
     }
 
 }

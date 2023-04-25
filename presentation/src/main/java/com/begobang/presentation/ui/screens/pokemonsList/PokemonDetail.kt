@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.begobang.domain.business.PokemonDetailBusiness
+import com.begobang.presentation.ui.composables.BaseScreen
 import com.begobang.presentation.ui.composables.EmptyState
 import com.begobang.presentation.ui.theme.PokemonTheme
 
@@ -40,31 +41,14 @@ fun PokemonDetailScreen(
     pokemon: PokemonDetailBusiness? = null,
     onRetry: () -> Unit,
 ) {
-    Column {
-        //if (loading) {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .padding(top = 40.dp)
-                    .size(size = 48.dp)
-                    .clickable { onRetry() }
 
-            )
-
-        //}
-
-        error?.let {
-            EmptyState(it) {
-                onRetry()
-            }
-        }
-
+    BaseScreen(loading = loading, error = error, onRetry = { onRetry() }) {
         pokemon?.let {
             Text(it.name)
             Text(it.abilities.joinToString("-"))
             Text(it.height.toString())
             Text(it.weight.toString())
         }
-
     }
 }
 
