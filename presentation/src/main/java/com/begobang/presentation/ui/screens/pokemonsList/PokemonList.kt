@@ -16,13 +16,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.begobang.domain.business.PokemonBusiness
 import com.begobang.presentation.R
-import com.begobang.presentation.ui.PokemonListViewModel
+import com.begobang.presentation.ui.composables.EmptyState
 import com.begobang.presentation.ui.composables.Separator
 import com.begobang.presentation.ui.theme.PokemonTheme
 import java.util.*
@@ -37,13 +38,15 @@ fun PokemonList(viewModel: PokemonListViewModel = hiltViewModel()){
         pokemonList = state.pokemon?.results,
         error = state.error,
         onClick = {
-            //viewModel.navigateToDetail(it)
+            viewModel.navigateToDetail(it)
         }
-    )
+    ){
+        viewModel.getPokemons()
+    }
 }
 
 @Composable
-fun PokemonListScreen(loading: Boolean, pokemonList: List<PokemonBusiness>? = emptyList(), error: String? = null, onClick: (String) -> Unit) {
+fun PokemonListScreen(loading: Boolean, pokemonList: List<PokemonBusiness>? = emptyList(), error: String? = null, onClick: (String) -> Unit, onRetry: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -51,7 +54,19 @@ fun PokemonListScreen(loading: Boolean, pokemonList: List<PokemonBusiness>? = em
     ) {
 
         if (loading) {
-            CircularProgressIndicator()
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .padding(top = 40.dp)
+                    .size(size = 48.dp)
+
+            )
+
+        }
+
+        error?.let {
+            EmptyState(it){
+                onRetry()
+            }
         }
 
         pokemonList?.let {

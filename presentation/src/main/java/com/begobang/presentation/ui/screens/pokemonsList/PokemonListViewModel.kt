@@ -1,5 +1,6 @@
-package com.begobang.presentation.ui
+package com.begobang.presentation.ui.screens.pokemonsList
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.begobang.domain.GetPokemons
@@ -12,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,11 +35,16 @@ class PokemonListViewModel @Inject constructor(
 
     fun getPokemons() {
         viewModelScope.launch(Dispatchers.IO) {
-            _state.value = PokemonState(loading = true)
-            getPokemons(Unit).fold(
-                ::handleError,
-                ::handleSuccess
-            )
+            try {
+                _state.value = PokemonState(loading = true)
+                getPokemons(Unit).fold(
+                    ::handleError,
+                    ::handleSuccess
+                )
+            } catch (e: UnknownHostException){
+                handleError(Failure.BaseFailure(message = e.message))
+            }
+
         }
 
     }

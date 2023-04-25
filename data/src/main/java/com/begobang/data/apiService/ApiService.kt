@@ -36,6 +36,6 @@ private fun <Api, Domain> parseGenericResponse(
     return if(response.isSuccessful) {
         success(response.body()).right()
     } else {
-        Either.left(Failure.BaseFailure("error"))
+        Either.left(Failure.BaseFailure(message = "Unknown Error"))
     }
 }

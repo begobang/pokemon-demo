@@ -46,9 +46,6 @@ class PokemonAppState(
 
     val showUpNavigation: Boolean
         @Composable get() = !NavigationItem.values().map { it.navCommand.route }.contains(currentRoute)
-
-    val showBottomNavigation: Boolean
-        @Composable get() = currentRoute.contains("home")
 }
 
 fun NavHostController.navigatePoppingUpToStartDestination(route: String) {
