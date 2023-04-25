@@ -19,6 +19,7 @@ import com.begobang.presentation.ui.PokemonScreen
 fun Toolbar(
     toolbarName: String,
     showUpNavigation: Boolean,
+    onUpClick: () -> Unit,
     content: @Composable (padding: PaddingValues) -> Unit
 ) {
 
@@ -35,7 +36,7 @@ fun Toolbar(
                     if(showUpNavigation){
                         AppBarIcon(
                             imageVector = Icons.Default.ArrowBack,
-                            onClick = {  },
+                            onClick = { onUpClick() },
                             contentDescription = "back"
                         )
                     }
@@ -58,6 +59,6 @@ fun AppBarIcon(imageVector: ImageVector, onClick: () -> Unit, contentDescription
 @Composable
 fun ToolbarPreview() {
     PokemonScreen {
-        Toolbar(toolbarName = "Hello world", showUpNavigation = true) {}
+        Toolbar(toolbarName = "Hello world", showUpNavigation = true, {}) {}
     }
 }

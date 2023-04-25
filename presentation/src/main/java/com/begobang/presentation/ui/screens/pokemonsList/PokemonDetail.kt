@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.begobang.domain.business.PokemonDetailBusiness
 import com.begobang.presentation.ui.composables.BaseScreen
@@ -19,7 +20,7 @@ import com.begobang.presentation.ui.composables.EmptyState
 import com.begobang.presentation.ui.theme.PokemonTheme
 
 @Composable
-fun PokemonDetail(id: String, viewModel: PokemonDetailViewModel = viewModel()) {
+fun PokemonDetail(id: String, viewModel: PokemonDetailViewModel = hiltViewModel()) {
 
     val state by viewModel.state.collectAsState()
 

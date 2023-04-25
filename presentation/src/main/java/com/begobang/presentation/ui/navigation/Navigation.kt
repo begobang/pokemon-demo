@@ -13,6 +13,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.begobang.presentation.ui.composables.BaseScreen
+import com.begobang.presentation.ui.screens.pokemonsList.PokemonDetail
 import com.begobang.presentation.ui.screens.pokemonsList.PokemonList
 
 @Composable
@@ -35,7 +37,7 @@ private fun NavGraphBuilder.pokemonsNav(navController: NavController) {
         }
 
         composable(NavCommand.ContentTypeDetail(Screens.POKEMON)) {
-            it.arguments?.getString("itemId")?.let { it1 ->  Text(text = it1)}
+            it.arguments?.getString("itemId")?.let { itemId ->  PokemonDetail(id = itemId)}
         }
     }
 }
