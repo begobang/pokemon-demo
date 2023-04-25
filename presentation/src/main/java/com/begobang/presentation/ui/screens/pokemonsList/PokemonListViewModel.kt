@@ -12,7 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.net.UnknownHostException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,16 +33,11 @@ class PokemonListViewModel @Inject constructor(
 
     fun getPokemons() {
         viewModelScope.launch(Dispatchers.IO) {
-            try {
-                _state.value = PokemonState(loading = true)
-                getPokemons(Unit).fold(
-                    ::handlePokemonsError,
-                    ::handlePokemonsSuccess
-                )
-            } catch (e: UnknownHostException){
-                handlePokemonsError(Failure.BaseFailure(message = e.message))
-            }
-
+            _state.value = PokemonState(loading = true)
+            getPokemons(Unit).fold(
+                ::handlePokemonsError,
+                ::handlePokemonsSuccess
+            )
         }
 
     }

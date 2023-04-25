@@ -1,7 +1,11 @@
 package com.begobang.data.di
 
+import android.content.Context
 import com.begobang.data.apiService.GetPokemonDetailApiService
 import com.begobang.data.apiService.GetPokemonsApiService
+import com.begobang.data.cache.AppDataBase
+import com.begobang.data.cache.PokemonDao
+import com.begobang.data.localDataSource.GetPokemonsLocalDataSource
 import com.begobang.data.remoteDataSource.GetPokemonDetailRemoteDataSource
 import com.begobang.data.remoteDataSource.GetPokemonsRemoteDataSource
 import com.begobang.data.repositoryImpl.GetPokemonDetailRepositoryImpl
@@ -12,6 +16,7 @@ import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,12 +30,30 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DataModule {
 
+    //Room
+    @Singleton
+    @Provides
+    fun provideAppDataBase(@ApplicationContext context: Context): AppDataBase {
+        return AppDataBase.getInstance(context)
+    }
+
+    @Singleton
+    @Provides
+    fun providePokemonsLocalDataSource(dao: PokemonDao): GetPokemonsLocalDataSource {
+        return GetPokemonsLocalDataSource(dao)
+    }
+
+    @Provides
+    fun providePokemonDao(appDataBase: AppDataBase): PokemonDao {
+        return appDataBase.pokemonDao()
+    }
+
     //Repository
 
     @Provides
     @Singleton
-    fun providePokemonsRepository(pokemonsRemoteDataSource: GetPokemonsRemoteDataSource): GetPokemonsRepository {
-        return GetPokemonsRepositoryImpl(pokemonsRemoteDataSource)
+    fun providePokemonsRepository(pokemonsRemoteDataSource: GetPokemonsRemoteDataSource, pokemonsLocalDataSource: GetPokemonsLocalDataSource): GetPokemonsRepository {
+        return GetPokemonsRepositoryImpl(pokemonsRemoteDataSource, pokemonsLocalDataSource)
     }
 
     @Provides

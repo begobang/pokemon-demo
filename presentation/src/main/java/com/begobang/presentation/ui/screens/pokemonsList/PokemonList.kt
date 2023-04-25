@@ -7,25 +7,23 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.viewModelFactory
 import coil.compose.AsyncImage
-import com.begobang.domain.business.PokemonBusiness
 import com.begobang.domain.business.PokemonItemBusiness
 import com.begobang.presentation.R
 import com.begobang.presentation.ui.composables.EmptyState
 import com.begobang.presentation.ui.composables.Separator
-import com.begobang.presentation.ui.theme.PokemonTheme
 import java.util.*
 
 @Composable
@@ -77,7 +75,7 @@ fun PokemonListScreen(loading: Boolean, pokemonList: List<PokemonItemBusiness>? 
                         PokemonItemScreen(
                             item = it,
                             modifier = Modifier.clickable {
-                                onClick(it.name)
+                                onRetry()
                             }
                         )
                     }
@@ -141,5 +139,11 @@ fun PokemonItemScreen(
     }
 
 
+}
+
+@Preview
+@Composable
+fun ListPreview(){
+    PokemonListScreen(loading = false, error = "Unable to resolve host.", onClick =  {}, onRetry = {})
 }
 
