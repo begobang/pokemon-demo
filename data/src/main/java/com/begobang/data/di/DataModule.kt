@@ -1,8 +1,12 @@
 package com.begobang.data.di
 
+import com.begobang.data.apiService.GetPokemonDetailApiService
 import com.begobang.data.apiService.GetPokemonsApiService
+import com.begobang.data.remoteDataSource.GetPokemonDetailRemoteDataSource
 import com.begobang.data.remoteDataSource.GetPokemonsRemoteDataSource
+import com.begobang.data.repositoryImpl.GetPokemonDetailRepositoryImpl
 import com.begobang.data.repositoryImpl.GetPokemonsRepositoryImpl
+import com.begobang.domain.GetPokemonDetailRepository
 import com.begobang.domain.GetPokemonsRepository
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -21,11 +25,21 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DataModule {
 
+    //Repository
+
     @Provides
     @Singleton
     fun providePokemonsRepository(pokemonsRemoteDataSource: GetPokemonsRemoteDataSource): GetPokemonsRepository {
         return GetPokemonsRepositoryImpl(pokemonsRemoteDataSource)
     }
+
+    @Provides
+    @Singleton
+    fun providePokemonDetailRepository(pokemonDetailRemoteDataSource: GetPokemonDetailRemoteDataSource): GetPokemonDetailRepository {
+        return GetPokemonDetailRepositoryImpl(pokemonDetailRemoteDataSource)
+    }
+
+    //RemoteDataSource
 
     @Provides
     @Singleton
@@ -35,9 +49,25 @@ class DataModule {
 
     @Provides
     @Singleton
+    fun providePokemonDetailRemoteDataSource(pokemonDetailApiService: GetPokemonDetailApiService): GetPokemonDetailRemoteDataSource {
+        return GetPokemonDetailRemoteDataSource(pokemonDetailApiService)
+    }
+
+    //Api Service
+
+    @Provides
+    @Singleton
     fun providePokemonsApiService(retrofit: Retrofit): GetPokemonsApiService {
         return createRetrofitImplementation(retrofit)
     }
+
+    @Provides
+    @Singleton
+    fun providePokemonDetailApiService(retrofit: Retrofit): GetPokemonDetailApiService {
+        return createRetrofitImplementation(retrofit)
+    }
+
+    //Retrofit
 
     @Provides
     @ApiEndPoint
