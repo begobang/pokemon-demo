@@ -2,7 +2,7 @@ package com.begobang.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val Purple200 = Color(0xFFFA7373)
+val Purple500 = Color(0xFFC50101)
+val Purple700 = Color(0xFFA71400)
+val Teal200 = Color(0xFF011296)

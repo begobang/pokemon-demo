@@ -1,11 +1,7 @@
 package com.begobang.presentation.ui.navigation
 
 import android.util.Log
-import androidx.compose.foundation.clickable
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -13,8 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.begobang.presentation.ui.composables.BaseScreen
-import com.begobang.presentation.ui.screens.pokemonsList.PokemonDetail
+import com.begobang.presentation.ui.screens.pokemonDetail.PokemonDetail
 import com.begobang.presentation.ui.screens.pokemonsList.PokemonList
 
 @Composable
@@ -37,7 +32,7 @@ private fun NavGraphBuilder.pokemonsNav(navController: NavController) {
         }
 
         composable(NavCommand.ContentTypeDetail(Screens.POKEMON)) {
-            it.arguments?.getString("itemId")?.let { itemId ->  PokemonDetail(id = itemId)}
+            it.arguments?.getString("itemId")?.let { itemId ->  PokemonDetail(id = itemId) }
         }
     }
 }

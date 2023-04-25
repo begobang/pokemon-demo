@@ -1,4 +1,4 @@
-package com.begobang.presentation.ui.screens.pokemonsList
+package com.begobang.presentation.ui.screens.pokemonDetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -72,15 +72,5 @@ class Converter {
         return Gson().fromJson(string, SpritesDTO::class.java)
     }
 
-    @TypeConverter
-    fun typeToString(typeDTO: TypesDTO): String {
-        return Gson().toJson(typeDTO)
-    }
-
-    @TypeConverter
-    fun stringToType(string: String): TypesDTO? {
-        return Gson().fromJson(string, TypesDTO::class.java)
-    }
-
 
 }

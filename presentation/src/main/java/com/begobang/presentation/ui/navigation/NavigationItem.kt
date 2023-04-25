@@ -1,10 +1,6 @@
 package com.begobang.presentation.ui.navigation
 
 import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.begobang.presentation.R

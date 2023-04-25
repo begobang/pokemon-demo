@@ -1,7 +1,6 @@
 package com.begobang.data.repositoryImpl
 
 import arrow.core.Either
-import arrow.core.right
 import com.begobang.data.localDataSource.GetPokemonsLocalDataSource
 import com.begobang.data.remoteDataSource.GetPokemonsRemoteDataSource
 import com.begobang.domain.GetPokemonsRepository
