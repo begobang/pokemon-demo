@@ -23,10 +23,15 @@ class PokemonDetailViewModel @Inject constructor(
     fun getPokemonDetail(id: String = "1"){
         viewModelScope.launch(Dispatchers.IO) {
             _state.value = PokemonDetailState(loading = true)
-            getPokemon(id).fold(
-                ::handlePokemonsError,
-                ::handlePokemonsSuccess
-            )
+            try {
+                getPokemon(id).fold(
+                    ::handlePokemonsError,
+                    ::handlePokemonsSuccess
+                )
+            } catch (e: Exception){
+                handlePokemonsError(Failure.BaseFailure(message = e.localizedMessage))
+            }
+
         }
     }
 

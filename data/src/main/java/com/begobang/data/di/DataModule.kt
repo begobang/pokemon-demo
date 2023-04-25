@@ -4,7 +4,9 @@ import android.content.Context
 import com.begobang.data.apiService.GetPokemonDetailApiService
 import com.begobang.data.apiService.GetPokemonsApiService
 import com.begobang.data.cache.AppDataBase
-import com.begobang.data.cache.PokemonDao
+import com.begobang.data.cache.dao.PokemonDao
+import com.begobang.data.cache.dao.PokemonDetailDao
+import com.begobang.data.localDataSource.GetPokemonDetailLocalDataSource
 import com.begobang.data.localDataSource.GetPokemonsLocalDataSource
 import com.begobang.data.remoteDataSource.GetPokemonDetailRemoteDataSource
 import com.begobang.data.remoteDataSource.GetPokemonsRemoteDataSource
@@ -43,9 +45,20 @@ class DataModule {
         return GetPokemonsLocalDataSource(dao)
     }
 
+    @Singleton
+    @Provides
+    fun providePokemonDetailLocalDataSource(dao: PokemonDetailDao): GetPokemonDetailLocalDataSource {
+        return GetPokemonDetailLocalDataSource(dao)
+    }
+
     @Provides
     fun providePokemonDao(appDataBase: AppDataBase): PokemonDao {
         return appDataBase.pokemonDao()
+    }
+
+    @Provides
+    fun providePokemonDetailDao(appDataBase: AppDataBase): PokemonDetailDao {
+        return appDataBase.pokemonDetailDao()
     }
 
     //Repository
@@ -58,8 +71,8 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun providePokemonDetailRepository(pokemonDetailRemoteDataSource: GetPokemonDetailRemoteDataSource): GetPokemonDetailRepository {
-        return GetPokemonDetailRepositoryImpl(pokemonDetailRemoteDataSource)
+    fun providePokemonDetailRepository(pokemonDetailRemoteDataSource: GetPokemonDetailRemoteDataSource, pokemonDetailLocalDataSource: GetPokemonDetailLocalDataSource): GetPokemonDetailRepository {
+        return GetPokemonDetailRepositoryImpl(pokemonDetailRemoteDataSource, pokemonDetailLocalDataSource)
     }
 
     //RemoteDataSource

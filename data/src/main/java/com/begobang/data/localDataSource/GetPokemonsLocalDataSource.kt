@@ -1,6 +1,6 @@
 package com.begobang.data.localDataSource
 
-import com.begobang.data.cache.PokemonDao
+import com.begobang.data.cache.dao.PokemonDao
 import com.begobang.data.cache.dto.PokemonsDTO
 import com.begobang.domain.business.PokemonItemBusiness
 import com.begobang.domain.business.PokemonsBusiness

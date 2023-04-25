@@ -8,6 +8,6 @@ import androidx.room.PrimaryKey
 data class PokemonsDTO(
     @PrimaryKey @ColumnInfo("name") val name: String = "",
     @ColumnInfo("url") val url: String,
-    @ColumnInfo("imageUrl") val imageUrl: String
+    @ColumnInfo("imageUrl") val imageUrl: String = ""
 
 )
