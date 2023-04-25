@@ -5,7 +5,11 @@ import com.begobang.data.cache.dto.PokemonsDTO
 import com.begobang.domain.business.PokemonItemBusiness
 import com.begobang.domain.business.PokemonsBusiness
 import javax.inject.Inject
-
+/*
+    This LocalDataSource establish the connection between the DataBase and the repository.
+    Depending on what we need from the DataBase we will call several methods. In this class,
+    we can recover all the data from the table, or even save a new row.
+ */
 class GetPokemonsLocalDataSource @Inject constructor(
     private val pokemonDao: PokemonDao
 ) {

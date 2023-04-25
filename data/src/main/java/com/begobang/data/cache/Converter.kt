@@ -4,7 +4,10 @@ import androidx.room.TypeConverter
 import com.begobang.data.cache.dto.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-
+/*
+    When we have entity classes with more complex Any objects, we will need to provide our
+    DataBase with Converter functions, or else it won't be able to handle this type of Anys.
+ */
 class Converter {
 
     @TypeConverter

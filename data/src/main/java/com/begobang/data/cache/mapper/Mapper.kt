@@ -3,6 +3,10 @@ package com.begobang.data.cache.mapper
 import com.begobang.data.cache.dto.*
 import com.begobang.domain.business.*
 
+/*
+    So that coding is simplier, we created a mapper extension class so that when we receive
+    data from our DataBase we can convert it to our Business class and also for the opposite.
+ */
 fun PokemonDTO.toDomain(): PokemonDetailBusiness {
     return PokemonDetailBusiness(
         abilities.map { it.toDomain() },

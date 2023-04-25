@@ -8,7 +8,10 @@ import com.begobang.domain.business.PokemonsBusiness
 import com.begobang.domain.failure.Failure
 import javax.inject.Inject
 
-
+/*
+    This RemoteDataSource establish the connection between the API request and the repository.
+    In this class, we can recover call refrofit service and recover the pokemon list we need.
+ */
 class GetPokemonsRemoteDataSource @Inject constructor(
     private val pokemonsApiService: GetPokemonsApiService
 ) {

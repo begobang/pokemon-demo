@@ -8,6 +8,14 @@ import com.begobang.domain.business.PokemonDetailBusiness
 import com.begobang.domain.failure.Failure
 import javax.inject.Inject
 
+/*
+    This class makes the connection between data and domain modules.
+
+    We can deal with 2 scenarios: The response of my request is good and we save all the data to
+    our data base, or the response is not successful and we need to retrieve the previous data from
+    the database, so that we can maintain the data from the last time the service worked.
+
+ */
 class GetPokemonDetailRepositoryImpl @Inject constructor(
     private val pokemonDetailRemoteDataSource: GetPokemonDetailRemoteDataSource,
     private val pokemonDetailLocalDataSource: GetPokemonDetailLocalDataSource

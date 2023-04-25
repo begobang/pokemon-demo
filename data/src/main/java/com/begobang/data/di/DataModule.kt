@@ -27,7 +27,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Qualifier
 import javax.inject.Singleton
-
+/*
+    In order to instantiate our injected classes, we will need to create a Module which provides
+    with them. Not only classes with injected annotation will need to be added here, but also other
+    classes like Retrofit or Room classes.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class DataModule {

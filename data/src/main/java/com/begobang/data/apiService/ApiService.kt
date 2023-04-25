@@ -6,7 +6,13 @@ import arrow.core.right
 import com.begobang.domain.failure.Failure
 import retrofit2.Call
 import retrofit2.Response
+/*
+    We will always need from an DataSource to be returning Either from the API Service.
+    This is important because in this way we can handle errors and exceptions. We will be always
+    do the same logic, so we customized requestGenericApi function, to use it in every data source
+    we have.
 
+ */
 suspend fun <Api, Domain> requestGenericApi(
     call: Call<Api>,
     success: (Api?) -> Domain?
