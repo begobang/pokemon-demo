@@ -22,6 +22,7 @@ import com.begobang.presentation.R
 import com.begobang.presentation.ui.composables.AppBarIcon
 import com.begobang.presentation.ui.composables.Toolbar
 import com.begobang.presentation.ui.navigation.Navigation
+import com.begobang.presentation.ui.screens.pokemonsList.PokemonList
 import com.begobang.presentation.ui.theme.PokemonTheme
 import kotlin.random.Random
 
@@ -37,7 +38,8 @@ fun PokemonApp(appState: PokemonAppState = rememberPokemonAppState(), viewModel:
             showUpNavigation = appState.showUpNavigation
         ) {
             Column {
-                Navigation(appState.navController)
+                //Navigation(appState.navController)
+                PokemonList()
             }
         }
     }

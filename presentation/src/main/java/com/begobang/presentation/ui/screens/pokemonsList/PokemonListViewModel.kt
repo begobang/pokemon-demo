@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.begobang.domain.GetPokemons
 import com.begobang.domain.business.PokemonsBusiness
 import com.begobang.domain.failure.Failure
+import com.begobang.presentation.ui.navigation.NavigationManager
+import com.begobang.presentation.ui.navigation.Screens
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PokemonListViewModel @Inject constructor(
-    private val getPokemons: GetPokemons
+    private val getPokemons: GetPokemons,
+    private val navigationManager: NavigationManager
 ): ViewModel() {
 
     private val _state = MutableStateFlow(PokemonState())
@@ -22,6 +25,10 @@ class PokemonListViewModel @Inject constructor(
 
     init {
         getPokemons()
+    }
+
+    fun navigateToDetail(name: String){
+        navigationManager.navigateDetail(Screens.POKEMON, name)
     }
 
     fun getPokemons() {
