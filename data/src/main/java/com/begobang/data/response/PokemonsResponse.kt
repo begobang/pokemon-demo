@@ -1,6 +1,7 @@
 package com.begobang.data.response
 
 import com.begobang.domain.business.PokemonBusiness
+import com.begobang.domain.business.PokemonItemBusiness
 import com.begobang.domain.business.PokemonsBusiness
 import com.google.gson.annotations.SerializedName
 
@@ -18,7 +19,14 @@ data class PokemonResponse(
 
 
 fun PokemonsResponse.toDomain(): PokemonsBusiness {
-    return PokemonsBusiness(count, next, previous, results.map { it.toDomain() })
+    return PokemonsBusiness(
+        count,
+        next,
+        previous,
+        results.mapIndexed { index, pokemonResponse ->
+            PokemonItemBusiness(pokemonResponse.name, pokemonResponse.url, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index+1}.png")
+        }
+    )
 }
 
 fun PokemonResponse.toDomain(): PokemonBusiness {

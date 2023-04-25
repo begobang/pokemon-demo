@@ -7,9 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,8 +18,10 @@ import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.viewModelFactory
 import coil.compose.AsyncImage
 import com.begobang.domain.business.PokemonBusiness
+import com.begobang.domain.business.PokemonItemBusiness
 import com.begobang.presentation.R
 import com.begobang.presentation.ui.composables.EmptyState
 import com.begobang.presentation.ui.composables.Separator
@@ -46,7 +46,7 @@ fun PokemonList(viewModel: PokemonListViewModel = hiltViewModel()){
 }
 
 @Composable
-fun PokemonListScreen(loading: Boolean, pokemonList: List<PokemonBusiness>? = emptyList(), error: String? = null, onClick: (String) -> Unit, onRetry: () -> Unit) {
+fun PokemonListScreen(loading: Boolean, pokemonList: List<PokemonItemBusiness>? = emptyList(), error: String? = null, onClick: (String) -> Unit, onRetry: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -93,9 +93,10 @@ fun PokemonListScreen(loading: Boolean, pokemonList: List<PokemonBusiness>? = em
 
 @Composable
 fun PokemonItemScreen(
-    item: PokemonBusiness?,
+    item: PokemonItemBusiness?,
     modifier: Modifier
 ){
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -108,7 +109,7 @@ fun PokemonItemScreen(
             verticalAlignment = Alignment.CenterVertically
             ){
             AsyncImage(
-                model = item?.url,
+                model = item?.imageUrl,
                 contentDescription = item?.name,
                 contentScale = ContentScale.Inside,
                 modifier = Modifier
@@ -142,10 +143,3 @@ fun PokemonItemScreen(
 
 }
 
-@Preview
-@Composable
-fun ItemPreview(){
-    PokemonTheme {
-        PokemonItemScreen(PokemonBusiness("Paco", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"), modifier = Modifier.clickable {  })
-    }
-}

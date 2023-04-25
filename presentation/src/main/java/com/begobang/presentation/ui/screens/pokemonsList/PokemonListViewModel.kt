@@ -1,6 +1,5 @@
 package com.begobang.presentation.ui.screens.pokemonsList
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.begobang.domain.GetPokemons
@@ -38,22 +37,22 @@ class PokemonListViewModel @Inject constructor(
             try {
                 _state.value = PokemonState(loading = true)
                 getPokemons(Unit).fold(
-                    ::handleError,
-                    ::handleSuccess
+                    ::handlePokemonsError,
+                    ::handlePokemonsSuccess
                 )
             } catch (e: UnknownHostException){
-                handleError(Failure.BaseFailure(message = e.message))
+                handlePokemonsError(Failure.BaseFailure(message = e.message))
             }
 
         }
 
     }
 
-    private fun handleError(failure: Failure){
+    private fun handlePokemonsError(failure: Failure){
         _state.value = PokemonState(loading = false, error = failure.exception)
     }
 
-    private fun handleSuccess(business: PokemonsBusiness?){
+    private fun handlePokemonsSuccess(business: PokemonsBusiness?){
         _state.value = PokemonState(loading = false, pokemon = business)
     }
 
