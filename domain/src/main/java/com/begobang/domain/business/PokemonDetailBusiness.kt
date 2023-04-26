@@ -1,6 +1,11 @@
 package com.begobang.domain.business
 
+/*
 
+    We create business data class that corresponds to the response of data module's services.
+    We need to have this Any objects so that we can use it in this module. Remember that
+    domain cannot see data module or presentation module.
+ */
 data class PokemonDetailBusiness(
     val abilities: List<AbilitiesBusiness>,
     val baseExperience: Int,

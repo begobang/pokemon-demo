@@ -12,6 +12,14 @@ import androidx.navigation.navigation
 import com.begobang.presentation.ui.screens.pokemonDetail.PokemonDetail
 import com.begobang.presentation.ui.screens.pokemonsList.PokemonList
 
+/*
+    In order to implement navigations in compose, we need to instantiate a NavHost composable
+    where we will set the different routes provided by the app and which composables will instantiate
+    in each route.
+
+    If we had a bottom bar with several section we would create a new navigation function for each one.
+    For example, pokemonsNav and newPokemonNav.
+ */
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(

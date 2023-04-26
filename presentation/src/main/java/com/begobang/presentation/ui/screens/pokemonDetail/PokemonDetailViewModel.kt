@@ -12,6 +12,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/*
+    In every viewModel that retrieved data to the UI, we need a State data class. Everytime there is
+    a change on its state, the composables will recompose and update the UI.
+
+    In this way we can show loading, update data or show an error state in the UI.
+ */
 @HiltViewModel
 class PokemonDetailViewModel @Inject constructor(
     var getPokemon: GetPokemonDetail

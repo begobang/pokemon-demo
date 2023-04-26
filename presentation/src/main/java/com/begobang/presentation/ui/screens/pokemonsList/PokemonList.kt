@@ -37,6 +37,16 @@ import com.begobang.presentation.ui.composables.SearchBar
 import com.begobang.presentation.ui.composables.Separator
 import java.util.Locale
 
+/*
+    In every Screen composable called in the navigation component, we need to declare our viewModel
+    if required, and its state will be the one recomposing the UI.
+
+    In order to use a "RecyclerView" in Compose we can use LazyColum, LazyRow and LazyGrid. It is much more
+    practical to use this kind of composables because we won't need to set an adapter and viewholders.
+    We just need to provide the Lazy* the data as items and the itemContent will be set with the UI we
+    need for each item. If we had different type of typeView we can create items one after another
+    or even separated ones without passing items.
+ */
 @Composable
 fun PokemonList(viewModel: PokemonListViewModel = hiltViewModel()){
 

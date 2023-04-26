@@ -16,6 +16,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+/*
+    I created an EmptyState composable to avoid repeating code. One of the keys from Compose is reusing
+    composables that can be used in several parts of our app. Making custom composables is key.
+ */
 @Composable
 fun EmptyState(message: String, onRetry: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize().padding(18.dp),

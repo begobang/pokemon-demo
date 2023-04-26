@@ -22,6 +22,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.begobang.presentation.ui.theme.PokemonTheme
 
+/*
+    We also make custom composables in order to have a clear screen in the main composable.
+ */
 @Composable
 fun SearchBar(search: String, onValueChange: (String) -> Unit, onReset: () -> Unit, onRetry: () -> Unit){
     Row(modifier = Modifier

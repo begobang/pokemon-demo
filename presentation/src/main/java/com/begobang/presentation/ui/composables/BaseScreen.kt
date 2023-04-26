@@ -10,6 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+/*
+    To avoid repeating code, I created a BaseScreen because I noticed that in every screen we
+    have a case where we need to show an error state and a loading state.
+ */
 @Composable
 fun BaseScreen(loading: Boolean, error: String?, onRetry: () -> Unit, content: @Composable () -> Unit){
     Column(

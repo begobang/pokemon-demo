@@ -19,17 +19,3 @@ val Shapes = Shapes(
     medium = RoundedCornerShape(20.dp),
     large = RoundedCornerShape(topStart = 50.dp, topEnd = 50.dp)
 )
-
-class SquashedOval : Shape {
-    override fun createOutline(
-        size: Size,
-        layoutDirection: LayoutDirection,
-        density: Density
-    ): Outline {
-        val rect = size.toRect()
-        val path = Path().apply {
-            addOval(rect)
-        }
-        return Outline.Generic(path)
-    }
-}
