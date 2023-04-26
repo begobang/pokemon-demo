@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -33,9 +32,9 @@ import coil.request.ImageRequest
 import com.begobang.domain.business.PokemonItemBusiness
 import com.begobang.presentation.R
 import com.begobang.presentation.ui.composables.BaseScreen
+import com.begobang.presentation.ui.composables.NameLabel
 import com.begobang.presentation.ui.composables.SearchBar
 import com.begobang.presentation.ui.composables.Separator
-import java.util.Locale
 
 /*
     In every Screen composable called in the navigation component, we need to declare our viewModel
@@ -133,11 +132,8 @@ fun PokemonItemScreen(
                     .padding(horizontal = 20.dp, vertical = 14.dp),
                 verticalArrangement = Arrangement.aligned(Alignment.CenterVertically)
             ){
-                Text(
-                    text = item?.name?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-                        ?: "",
-                    style = MaterialTheme.typography.h2,
-                    modifier = Modifier
+                NameLabel(
+                    name = item?.name, modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                 )
             }
