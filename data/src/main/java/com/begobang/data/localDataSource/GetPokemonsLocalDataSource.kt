@@ -10,10 +10,14 @@ import javax.inject.Inject
     Depending on what we need from the DataBase we will call several methods. In this class,
     we can recover all the data from the table, or even save a new row.
  */
+interface PokemonsLocalDataSource {
+    fun getAll(): PokemonsBusiness
+    fun savePokemons(pokemons: PokemonsBusiness)
+}
 class GetPokemonsLocalDataSource @Inject constructor(
     private val pokemonDao: PokemonDao
-) {
-    fun getAll(): PokemonsBusiness {
+): PokemonsLocalDataSource {
+    override fun getAll(): PokemonsBusiness {
         return PokemonsBusiness(
             count = pokemonDao.getPokemons().size,
             next = "",
@@ -24,7 +28,7 @@ class GetPokemonsLocalDataSource @Inject constructor(
         )
     }
 
-    fun savePokemons(pokemons: PokemonsBusiness){
+    override fun savePokemons(pokemons: PokemonsBusiness){
         pokemons.results.forEach {
             pokemonDao.insertPokemon(PokemonsDTO(name = it.name, url = it.url, imageUrl = it.imageUrl))
         }

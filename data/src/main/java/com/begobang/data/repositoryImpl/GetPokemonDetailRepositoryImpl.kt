@@ -2,7 +2,9 @@ package com.begobang.data.repositoryImpl
 
 import arrow.core.Either
 import com.begobang.data.localDataSource.GetPokemonDetailLocalDataSource
+import com.begobang.data.localDataSource.PokemonDetailLocalDataSource
 import com.begobang.data.remoteDataSource.GetPokemonDetailRemoteDataSource
+import com.begobang.data.remoteDataSource.PokemonDetailRemoteDataSource
 import com.begobang.domain.GetPokemonDetailRepository
 import com.begobang.domain.business.PokemonDetailBusiness
 import com.begobang.domain.failure.Failure
@@ -15,10 +17,14 @@ import javax.inject.Inject
     our data base, or the response is not successful and we need to retrieve the previous data from
     the database, so that we can maintain the data from the last time the service worked.
 
+    This repositoryImpl receives the interface data sources so that can be tested properly. When hilt
+    injects this data sources, it will return the real data source, that is the one we need in production.
+    By doing this, we can test with fakes.
+
  */
 class GetPokemonDetailRepositoryImpl @Inject constructor(
-    private val pokemonDetailRemoteDataSource: GetPokemonDetailRemoteDataSource,
-    private val pokemonDetailLocalDataSource: GetPokemonDetailLocalDataSource
+    private val pokemonDetailRemoteDataSource: PokemonDetailRemoteDataSource,
+    private val pokemonDetailLocalDataSource: PokemonDetailLocalDataSource
 ): GetPokemonDetailRepository {
     override suspend fun getPokemonDetail(name: String): Either<Failure, PokemonDetailBusiness?> {
         return try {
